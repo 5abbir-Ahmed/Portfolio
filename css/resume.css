@@ -1,0 +1,123 @@
+.resume-layout {
+    display: grid;
+    grid-template-columns: .7fr 1.3fr;
+    gap: 70px;
+    margin-top: 40px;
+}
+
+.resume-intro {
+    padding: 28px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    border-radius: 4px;
+    height: fit-content;
+}
+
+.resume-intro h2 {
+    font-family: var(--display);
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.resume-intro p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.resume-intro .btn-primary {
+    margin-top: 28px;
+}
+
+/* ---------- RULER (entrance element, drawn by resume.js) ---------- */
+
+.resume-content {
+    position: relative;
+    padding-left: 26px;
+}
+
+.ruler {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+}
+
+.ruler-fill {
+    display: block;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(var(--ash-100), var(--ash-600));
+    transition: height 1.1s cubic-bezier(.25, .8, .3, 1);
+}
+
+.resume-timeline {
+    display: flex;
+    flex-direction: column;
+}
+
+.resume-block {
+    position: relative;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 18px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+
+.resume-block.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.resume-block .node {
+    position: relative;
+    font-family: var(--mono);
+    color: var(--ash-600);
+    font-size: 10px;
+}
+
+.resume-block .node::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 4px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--black);
+    border: 1.5px solid var(--ash-500);
+}
+
+.resume-block.show .node::before {
+    background: var(--ash-100);
+}
+
+.resume-block h2 {
+    font-family: var(--display);
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.resume-block h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ash-200);
+}
+
+.resume-block p {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .resume-layout { grid-template-columns: 1fr; gap: 40px; }
+}
