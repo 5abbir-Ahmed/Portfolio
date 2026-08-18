@@ -9,6 +9,8 @@
 
     <title>Resume | Sabbir Ahmed</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/resume.css">
 
@@ -17,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
 
 </head>
@@ -43,7 +45,7 @@
             <a href="about.html">About</a>
             <a href="project.html">Projects</a>
             <a href="contact.html">Contact</a>
-            <a href="resume.html" class="active resume-nav">Resume<span>↗</span></a>
+            <a href="resume.html" class="active resume-nav">Resume</a>
         </nav>
 
         <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -58,56 +60,168 @@
 
         <section class="page-section resume-section">
 
-            <div class="page-heading">
-                <h1>My professional <strong>journey.</strong></h1>
-            </div>
+            <div class="cv-layout">
 
-            <div class="resume-layout">
+                <aside class="cv-sidebar bracket" id="cvSidebar">
 
-                <div class="resume-intro bracket">
-                    <h2>Sabbir Ahmed</h2>
-                    <p>Full-Stack Developer</p>
-                    <p>Computer Science & Engineering Graduate</p>
-
-                    <a href="assets/resume/Sabbir-Ahmed-CV.pdf" download class="btn-primary">
-                        Download CV<span>↓</span>
-                    </a>
-                </div>
-
-                <div class="resume-content">
-
-                    <div class="ruler"><span class="ruler-fill"></span></div>
-
-                    <div class="resume-timeline">
-
-                        <div class="resume-block">
-                            <span class="node">01</span>
-                            <div>
-                                <h2>Education</h2>
-                                <h3>Bachelor of Science in Computer Science & Engineering</h3>
-                                <p>Daffodil International University</p>
-                            </div>
-                        </div>
-
-                        <div class="resume-block">
-                            <span class="node">02</span>
-                            <div>
-                                <h2>Skills</h2>
-                                <p>HTML · CSS · JavaScript · PHP · Laravel · MySQL</p>
-                            </div>
-                        </div>
-
-                        <div class="resume-block">
-                            <span class="node">03</span>
-                            <div>
-                                <h2>Career Goal</h2>
-                                <p>To grow as a software engineer and build reliable, scalable and user-friendly
-                                    software.</p>
-                            </div>
-                        </div>
-
+                    <div class="cv-avatar">
+                        <img src="assets/img/2.png" alt="Sabbir Ahmed">
                     </div>
 
+                    <div class="cv-identity">
+                        <h2>Sabbir Ahmed</h2>
+                        <p>Web Developer</p>
+                    </div>
+
+                    <div class="cv-block">
+                        <span class="cv-block-label">About Me</span>
+                        <p class="cv-about-text">
+                            I am a highly motivated BSc Computer Science and Engineering graduate with a strong
+                            foundation in computing, software
+                            development, systems analysis, and data-driven problem-solving. 
+                            I am interested in software engineering, computer science, and data science, with a strong
+                            motivation to develop practical
+                            technical skills and contribute to innovative technology-driven projects.
+                        </p>
+                    </div>
+
+                    <div class="cv-block">
+                        <span class="cv-block-label">Contact</span>
+
+                        <ul class="cv-contact-list">
+                            <li>
+                                <i class="fa-solid fa-phone"></i>
+                                <a href="tel:+8801797978935">+880 1797-978935</a>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-envelope"></i>
+                                <a href="mailto:sabbir987.sa@gmail.com">sabbir987.sa@gmail.com</a>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-map-marker-alt"></i>
+                                <span>Mirpur, Dhaka-1216, Bangladesh</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="cv-block">
+                        <span class="cv-block-label">Skills</span>
+
+                        <ul class="cv-dot-list">
+                            <li>HTML & CSS</li>
+                            <li>JavaScript</li>
+                            <li>PHP & Laravel</li>
+                            <li>MySQL</li>
+                            <li>C Programming</li>
+                            <li>Python</li>
+                            <li>Problem Solving</li>
+                            <li>Team Work</li>
+                        </ul>
+                    </div>
+
+                    <div class="cv-block">
+                        <span class="cv-block-label">Language</span>
+
+                        <div class="cv-lang-row">
+
+                            <div class="cv-lang-item">
+                                <div class="cv-lang-circle" style="--pct:100">
+                                    <span>100%</span>
+                                </div>
+                                <p>Bangla</p>
+                            </div>
+
+                            <div class="cv-lang-item">
+                                <div class="cv-lang-circle" style="--pct:80">
+                                    <span>80%</span>
+                                </div>
+                                <p>English</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </aside>
+
+
+                <div class="cv-main">
+
+                    <section class="cv-section">
+                        <h3 class="cv-heading">Education</h3>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-row">
+                                <strong>Daffodil International University</strong>
+                                <span class="cv-date">2022 — 2025</span>
+                            </div>
+                            <p class="cv-org">Bachelor of Science in Computer Science and Engineering</p>
+                            <p class="cv-org">GPA 3.11/4.00</p>
+                        </div>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-row">
+                                <strong>Sylhet Government College</strong>
+                                <span class="cv-date">2018 — 2019</span>
+                            </div>
+                            <p class="cv-org">Higher Secondary Certificate (Science) </p>
+                            <p class="cv-org">GPA 5.00/5.00</p>
+                        </div>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-row">
+                                <strong>Sylhet Government Pilot High School</strong>
+                                <span class="cv-date">2016 — 2017</span>
+                            </div>
+                            <p class="cv-org">Secondary School Certificate (Science) </p>
+                            <p class="cv-org">GPA 4.89/5.00</p>
+                        </div>
+                    </section>
+
+                    <section class="cv-section">
+                        <h3 class="cv-heading">Projects</h3>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-row">
+                                <strong>Let's Explore Bangladesh</strong>
+                                <span class="cv-date">Web App</span>
+                            </div>
+                            <p class="cv-org">A web-based platform for exploring tourist destinations across Bangladesh.
+                            </p>
+                        </div>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-row">
+                                <strong>Restaurant Reservation System</strong>
+                                <span class="cv-date">Web + Mobile</span>
+                            </div>
+                            <p class="cv-org">A responsive restaurant reservation platform with a companion mobile app.
+                            </p>
+                        </div>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-row">
+                                <strong>Smart Agriculture Monitoring System</strong>
+                                <span class="cv-date">IoT</span>
+                            </div>
+                            <p class="cv-org">An IoT-based system for automated agriculture monitoring.</p>
+                        </div>
+
+                    </section>
+
+                    <section class="cv-section">
+                        <h3 class="cv-heading">Final Year Project</h3>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-row">
+                                <strong>Predicting Depression of Bangladeshi University Students Using Machine
+                                    Learning</strong>
+                                <span class="cv-date">2025</span>
+                            </div>
+                            <p class="cv-org">Designed a scalable system for integration into web or mobile mental
+                                health platforms.</p>
+                        </div>
+
+                    </section>
                 </div>
 
             </div>
