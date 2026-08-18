@@ -19,7 +19,31 @@
     margin-right: auto;
 }
 
-/* ---------- PHOTO ---------- */
+.about-scroll {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.about-text {
+    animation: aboutScroll 20s linear  infinite;
+}
+
+.about-scroll:hover .about-text {
+    animation-play-state: paused;
+}
+
+@keyframes aboutScroll {
+
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+
+}
 
 .about-photo {
     width: 100%;
@@ -44,7 +68,6 @@
     transform: scale(1.03);
 }
 
-/* ---------- CONTENT ---------- */
 
 .about-content h2 {
     font-family: var(--display);
@@ -52,6 +75,7 @@
     font-weight: 600;
     margin-bottom: 20px;
     letter-spacing: -1px;
+    text-align: center;
 }
 
 .about-content p {
@@ -61,7 +85,6 @@
     line-height: 1.85;
 }
 
-/* ---------- STATS ---------- */
 
 .about-stats {
     display: grid;
@@ -102,7 +125,6 @@
     letter-spacing: .5px;
 }
 
-/* ---------- SKILLS ---------- */
 
 .skills-section {
     margin-top: 110px;
@@ -124,15 +146,25 @@
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    gap: 20px;
 }
 
 .skill-card {
-    padding: 22px;
+    padding: 12px 15px;
     border: 1px solid var(--line);
     border-radius: 4px;
     background: var(--panel);
-    transition: border-color .3s ease, transform .3s ease;
+    opacity: 0;
+    transform: translateY(35px);
+    transition:
+        opacity .7s cubic-bezier(.22, 1, .36, 1),
+        transform .7s cubic-bezier(.22, 1, .36, 1),
+        border-color .3s ease;
+}
+
+.skill-card.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .skill-card:hover {
@@ -144,18 +176,18 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 20px;
+    gap: 10px;
 }
 
 .skill-card h3 {
     font-family: var(--display);
     color: var(--ash-100);
-    font-size: 19px;
+    font-size: 15px;
     font-weight: 600;
 }
 
 .skill-card p {
-    margin-top: 5px;
+    margin-top: 3px;
     color: var(--ash-600);
     font-family: var(--mono);
     font-size: 10px;
@@ -164,14 +196,14 @@
 .skill-card-top>strong {
     font-family: var(--mono);
     color: var(--ash-300);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
 }
 
 .skill-bar {
     width: 100%;
-    height: 3px;
-    margin-top: 20px;
+    height: 5px;
+    margin-top: 10px;
     overflow: hidden;
     border-radius: 4px;
     background: var(--line);
@@ -190,7 +222,6 @@
     opacity: 0;
 }
 
-/* ---------- RESPONSIVE ---------- */
 
 @media (max-width: 900px) {
     .about-layout {
