@@ -1,92 +1,268 @@
-/* =========================================================
-   CONTACT.JS
-   Signature move: a radar-style sweep passes down the page
-   on load, form fields cascade in after it, inputs get an
-   animated underline while focused, the submit button has
-   a magnetic pull toward the cursor, and submitting prints
-   a short terminal-style confirmation — distinct from the
-   entrance styles used on every other page.
-========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ---------- ENTRANCE: RADAR SWEEP ---------- */
+    const sweep =
+        document.querySelector(".radar-sweep");
 
-    const sweep = document.querySelector(".radar-sweep");
-    const infoNodes = document.querySelectorAll(".contact-info > *");
-    const form = document.querySelector(".contact-form");
-    const detailLinks = document.querySelectorAll(".contact-details a");
-    const socialLinks = document.querySelectorAll(".social-links a");
+    const infoNodes =
+        document.querySelectorAll(
+            ".contact-info > *"
+        );
+
+    const form =
+        document.querySelector(".contact-form");
+
+    const detailLinks =
+        document.querySelectorAll(
+            ".contact-details a"
+        );
+
+    const socialLinks =
+        document.querySelectorAll(
+            ".social-links a"
+        );
+
+
+    /* =========================
+       CONTACT ENTRANCE
+    ========================= */
 
     function revealContact() {
+
         infoNodes.forEach((el, i) => {
+
             setTimeout(() => {
+
                 el.style.opacity = "1";
-                el.style.transform = "translateY(0)";
+
+                el.style.transform =
+                    "translateY(0)";
+
             }, i * 130);
+
         });
+
 
         detailLinks.forEach((el, i) => {
-            el.style.transition = "opacity .5s ease, transform .5s ease";
+
+            el.style.transition =
+                "opacity .5s ease, transform .5s ease";
+
             setTimeout(() => {
+
                 el.style.opacity = "1";
-                el.style.transform = "translateY(0)";
+
+                el.style.transform =
+                    "translateY(0)";
+
             }, 250 + i * 90);
+
         });
+
 
         socialLinks.forEach((el, i) => {
+
             setTimeout(() => {
+
                 el.style.opacity = "1";
-                el.style.transform = "translateY(0)";
+
+                el.style.transform =
+                    "translateY(0)";
+
             }, 600 + i * 70);
+
         });
+
 
         if (form) {
+
             setTimeout(() => {
+
                 form.style.opacity = "1";
-                form.style.transform = "translateY(0)";
+
+                form.style.transform =
+                    "translateY(0)";
+
             }, 150);
+
         }
+
     }
+
 
     if (sweep) {
+
         requestAnimationFrame(() => {
-            sweep.style.transition = "transform .9s cubic-bezier(.65,0,.35,1)";
-            sweep.style.transform = "translateY(100%)";
+
+            sweep.style.transition =
+                "transform .9s cubic-bezier(.65,0,.35,1)";
+
+            sweep.style.transform =
+                "translateY(100%)";
+
         });
-        setTimeout(revealContact, 300);
+
+        setTimeout(
+            revealContact,
+            300
+        );
+
     } else {
+
         revealContact();
+
     }
 
 
-    /* ---------- SUBMIT FEEDBACK (driven by common.js's real
-       fetch-based form handler) ---------- */
+    /* =========================
+       FORM STATUS
+    ========================= */
 
-    const status = document.querySelector(".form-status");
-    const submitBtn = document.querySelector(".contact-form .btn-primary");
+    if (!form) return;
 
-    if (form && status) {
 
-        form.addEventListener("portfolio:sending", () => {
-            status.classList.remove("success", "error");
-            status.textContent = "> sending message...";
-            if (submitBtn) submitBtn.disabled = true;
-        });
+    const status =
+        form.querySelector(
+            ".form-status"
+        );
 
-        form.addEventListener("portfolio:success", () => {
-            status.classList.remove("error");
-            status.classList.add("success");
-            status.textContent = "> message received. thank you!";
-            if (submitBtn) submitBtn.disabled = false;
-        });
 
-        form.addEventListener("portfolio:error", () => {
-            status.classList.remove("success");
-            status.classList.add("error");
-            status.textContent = "> something went wrong. please try again or email me directly.";
-            if (submitBtn) submitBtn.disabled = false;
-        });
+    const submitBtn =
+        form.querySelector(
+            ".btn-primary"
+        );
+
+
+    let statusTimer;
+
+
+    function showStatus(
+        message,
+        type
+    ) {
+
+        if (!status) return;
+
+
+        clearTimeout(
+            statusTimer
+        );
+
+
+        status.classList.remove(
+            "success",
+            "error",
+            "sending",
+            "show"
+        );
+
+
+        status.textContent =
+            message;
+
+
+        /* Force reflow */
+
+        void status.offsetWidth;
+
+
+        status.classList.add(
+            type,
+            "show"
+        );
+
+
+        statusTimer =
+            setTimeout(() => {
+
+                status.classList.remove(
+                    "show"
+                );
+
+            }, 5000);
+
     }
+
+
+    /* =========================
+       INVALID EMAIL
+    ========================= */
+
+    form.addEventListener(
+        "portfolio:invalid-email",
+        () => {
+
+            showStatus(
+                "Please enter a valid email address.",
+                "error"
+            );
+
+        }
+    );
+
+
+    /* =========================
+       SENDING
+    ========================= */
+
+    form.addEventListener(
+        "portfolio:sending",
+        () => {
+
+            showStatus(
+                "Sending your message...",
+                "sending"
+            );
+
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+            }
+
+        }
+    );
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    form.addEventListener(
+        "portfolio:success",
+        () => {
+
+            showStatus(
+                "Thank you for your message. I will get back to you soon!",
+                "success"
+            );
+
+
+            if (submitBtn) {
+                submitBtn.disabled = false;
+            }
+
+        }
+    );
+
+
+    /* =========================
+       ERROR
+    ========================= */
+
+    form.addEventListener(
+        "portfolio:error",
+        () => {
+
+            showStatus(
+                "Something went wrong. Please try again.",
+                "error"
+            );
+
+
+            if (submitBtn) {
+                submitBtn.disabled = false;
+            }
+
+        }
+    );
 
 });

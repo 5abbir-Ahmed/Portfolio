@@ -47,8 +47,8 @@
 
 .about-photo {
     width: 100%;
-    max-width: 300px;
-    height: 350px;
+    max-width: 350px;
+    height: 400px;
     margin: 0 auto;
     overflow: hidden;
     border: 1px solid var(--line-strong);

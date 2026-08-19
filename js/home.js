@@ -1,15 +1,4 @@
-/* =========================================================
-   HOME.JS
-   Signature move: a terminal-style "boot sequence" line
-   types itself out above the hero title before the rest
-   of the hero staggers in. Distinct from every other page,
-   which use split-panel, tiled, ruler-drop, or radar-sweep
-   entrances instead.
-========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    /* ---------- ENTRANCE: BOOT SEQUENCE ---------- */
 
     const bootLine = document.querySelector(".boot-line");
     const heroPieces = [
@@ -56,8 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
         revealHero();
     }
 
-    /* ---------- TYPING ROLE TEXT ---------- */
-
     const typing = document.getElementById("typing");
 
     if (typing) {
@@ -99,8 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setTimeout(type, deleting ? 45 : 95);
         }
-
-        // start typing only once the boot line has finished
         setTimeout(type, bootLine ? 900 : 200);
     }
 

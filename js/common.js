@@ -1,13 +1,3 @@
-/* =========================================================
-   COMMON.JS
-   Shared across every page: mobile nav, outbound link
-   transition, and a small reveal-on-scroll helper that
-   each page script (home.js, about.js, ...) configures
-   differently.
-========================================================= */
-
-/* ---------- MOBILE MENU ---------- */
-
 (function initMenu() {
     const menuButton = document.querySelector(".menu-toggle");
     const navMenu = document.querySelector(".nav-menu");
@@ -122,29 +112,105 @@ window.PortfolioReveal = function (elements, opts = {}) {
    where a .contact-form exists) ---------- */
 
 (function initContactForm() {
-    const form = document.querySelector(".contact-form");
+
+    const form =
+        document.querySelector(".contact-form");
+
     if (!form) return;
 
+
     form.addEventListener("submit", async event => {
+
         event.preventDefault();
 
-        form.dispatchEvent(new CustomEvent("portfolio:sending"));
+
+        /* =========================
+           EMAIL VALIDATION
+        ========================= */
+
+        const emailInput =
+            form.querySelector('input[type="email"]');
+
+        if (emailInput) {
+
+            const email =
+                emailInput.value.trim();
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            if (!emailPattern.test(email)) {
+
+                form.dispatchEvent(
+                    new CustomEvent(
+                        "portfolio:invalid-email"
+                    )
+                );
+
+                emailInput.focus();
+
+                return;
+            }
+        }
+
+
+        /* =========================
+           FORMSPREE SUBMIT
+        ========================= */
+
+        form.dispatchEvent(
+            new CustomEvent("portfolio:sending")
+        );
+
 
         try {
-            const response = await fetch(form.action, {
-                method: "POST",
-                body: new FormData(form),
-                headers: { "Accept": "application/json" }
-            });
+
+            const response =
+                await fetch(form.action, {
+
+                    method: "POST",
+
+                    body: new FormData(form),
+
+                    headers: {
+                        Accept:
+                            "application/json"
+                    }
+
+                });
+
 
             if (response.ok) {
-                form.dispatchEvent(new CustomEvent("portfolio:success"));
+
+                form.dispatchEvent(
+                    new CustomEvent(
+                        "portfolio:success"
+                    )
+                );
+
                 form.reset();
+
             } else {
-                form.dispatchEvent(new CustomEvent("portfolio:error"));
+
+                form.dispatchEvent(
+                    new CustomEvent(
+                        "portfolio:error"
+                    )
+                );
+
             }
-        } catch (err) {
-            form.dispatchEvent(new CustomEvent("portfolio:error"));
+
+        } catch (error) {
+
+            form.dispatchEvent(
+                new CustomEvent(
+                    "portfolio:error"
+                )
+            );
+
         }
+
     });
+
 })();
