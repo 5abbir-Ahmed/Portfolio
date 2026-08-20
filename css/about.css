@@ -26,7 +26,7 @@
 }
 
 .about-text {
-    animation: aboutScroll 20s linear  infinite;
+    animation: aboutScroll 20s linear infinite;
 }
 
 .about-scroll:hover .about-text {
@@ -35,11 +35,11 @@
 
 @keyframes aboutScroll {
 
-    0% {
-        transform: translateY(100%);
+    from {
+        transform: translateY(70%);
     }
 
-    100% {
+    to {
         transform: translateY(-100%);
     }
 
@@ -237,6 +237,32 @@
         max-width: 320px;
         height: 340px;
     }
+
+    .about-scroll {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .about-text {
+        animation: aboutScroll 20s linear infinite;
+    }
+
+    .about-scroll:hover .about-text {
+        animation-play-state: paused;
+    }
+
+    @keyframes aboutScroll {
+
+        from {
+            transform: translateY(60%);
+        }
+
+        to {
+            transform: translateY(-100%);
+        }
+
+    }
 }
 
 @media (max-width: 650px) {
@@ -254,5 +280,31 @@
 
     .skills-grid {
         grid-template-columns: 1fr;
+    }
+
+    .about-scroll {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .about-text {
+        animation: aboutScroll 30s linear infinite;
+    }
+
+    .about-scroll:hover .about-text {
+        animation-play-state: paused;
+    }
+
+    @keyframes aboutScroll {
+
+        from {
+            transform: translateY(30%);
+        }
+
+        to {
+            transform: translateY(-100%);
+        }
+
     }
 }
