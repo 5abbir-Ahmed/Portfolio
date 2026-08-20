@@ -288,10 +288,10 @@ textarea:focus-visible {
     color: var(--ash-100);
 }
 
-.nav-menu > a:not(.resume-nav).active {
-    color: var(--ash-100);
-    background: var(--panel-light);
-    border: 1px solid var(--line-strong);
+a.active.resume-nav {
+    color: black;
+    background: rgb(243, 245, 243);
+    box-shadow: 0 12px 30px rgba(244, 244, 243, .12);
 }
 
 .resume-nav {
@@ -488,10 +488,6 @@ textarea:focus-visible {
     .page-section { padding: 95px 18px 60px; }
 }
 
-/* =====================================================
-   REVEAL BASE (page-specific JS decides timing/stagger)
-===================================================== */
-
 .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -553,16 +549,10 @@ textarea:focus-visible {
     transform: translateY(-3px);
 }
 
-/* magnetic wrapper used by contact.js */
 .magnetic {
     display: inline-block;
     will-change: transform;
 }
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
 .footer {
     width: 100%;
     max-width: 1200px;

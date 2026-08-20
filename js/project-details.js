@@ -217,7 +217,7 @@ document.addEventListener(
                             class="details-btn"
                         >
                             GitHub
-                            <span>↗</span>
+                            <span>➥</span>
                         </a>
 
                     </div>
@@ -370,9 +370,6 @@ document.addEventListener(
 
         `;
 
-        /* =========================
-   GALLERY LIGHTBOX
-========================= */
 
         const galleryItems =
             container.querySelectorAll(".gallery-item img");
