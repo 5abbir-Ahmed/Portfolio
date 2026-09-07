@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tiles.forEach(tile => {
 
         tile.style.transition =
-            "opacity .6s cubic-bezier(.25,.8,.3,1), transform .6s cubic-bezier(.25,.8,.3,1)";
+            "opacity .95s cubic-bezier(.25,.8,.3,1), transform .95s cubic-bezier(.25,.8,.3,1)";
 
     });
 
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 tile.style.transform =
                     "scale(1)";
 
-            }, i * 140);
+            }, i * 220);
 
         });
 

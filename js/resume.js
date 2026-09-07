@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sidebar) {
         sidebar.style.opacity = "0";
         sidebar.style.transform = "translateY(16px)";
-        sidebar.style.transition = "opacity .6s ease, transform .6s ease";
+        sidebar.style.transition = "opacity .95s ease, transform .95s ease";
 
         requestAnimationFrame(() => {
             setTimeout(() => {
                 sidebar.style.opacity = "1";
                 sidebar.style.transform = "translateY(0)";
-            }, 80);
+                }, 180);
         });
     }
 
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sections = document.querySelectorAll(".cv-section");
 
     window.PortfolioReveal(sections, {
-        stagger: 90,
+        stagger: 150,
         onShow: el => el.classList.add("show")
     });
 

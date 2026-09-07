@@ -8,8 +8,8 @@ panels.forEach((el, i) => {
         `translateX(${fromLeft ? "-40px" : "40px"})`;
 
     el.style.transition = [
-        "opacity .8s cubic-bezier(.22, 1, .36, 1)",
-        "transform .8s cubic-bezier(.22, 1, .36, 1)"
+        "opacity 1.15s cubic-bezier(.22, 1, .36, 1)",
+        "transform 1.15s cubic-bezier(.22, 1, .36, 1)"
     ].join(", ");
 });
 
@@ -29,11 +29,11 @@ requestAnimationFrame(() => {
 
                 setTimeout(() => {
                     aboutText.classList.add("scroll-start");
-                }, 2000);
+                }, 2800);
 
             }
 
-        }, i * 150);
+        }, i * 240);
 
     });
 
@@ -67,7 +67,7 @@ requestAnimationFrame(() => {
                         });
                     }
 
-                }, index * 120);
+                }, index * 180);
 
                
                 observer.unobserve(card);

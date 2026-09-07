@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     heroPieces.forEach(el => {
         el.style.opacity = "0";
         el.style.transform = "translateY(18px)";
-        el.style.transition = "opacity .7s ease, transform .7s ease";
+        el.style.transition = "opacity 1s ease, transform 1s ease";
     });
 
     function typeBootLine(text, el, done) {
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             i++;
             if (i === text.length) {
                 clearInterval(interval);
-                setTimeout(done, 250);
+                setTimeout(done, 400);
             }
         }, 22);
     }
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 el.style.opacity = "1";
                 el.style.transform = "translateY(0)";
-            }, i * 110);
+            }, i * 180);
         });
     }
 
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (charIndex === current.length) {
                     deleting = true;
-                    setTimeout(type, 1800);
+                    setTimeout(type, 2200);
                     return;
                 }
             } else {
@@ -79,14 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (charIndex === 0) {
                     deleting = false;
                     roleIndex = (roleIndex + 1) % roles.length;
-                    setTimeout(type, 500);
+                    setTimeout(type, 700);
                     return;
                 }
             }
 
-            setTimeout(type, deleting ? 45 : 95);
+            setTimeout(type, deleting ? 60 : 110);
         }
-        setTimeout(type, bootLine ? 900 : 200);
+        setTimeout(type, bootLine ? 1100 : 300);
     }
 
 });

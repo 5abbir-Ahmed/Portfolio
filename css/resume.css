@@ -192,7 +192,7 @@
     padding-bottom: 38px;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity .6s ease, transform .6s ease;
+    transition: opacity .95s ease, transform .95s ease;
 }
 
 .cv-section.show {

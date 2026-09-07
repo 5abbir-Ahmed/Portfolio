@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 el.style.transform =
                     "translateY(0)";
 
-            }, i * 130);
+            }, i * 190);
 
         });
 
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 el.style.transform =
                     "translateY(0)";
 
-            }, 250 + i * 90);
+            }, 380 + i * 130);
 
         });
 
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 el.style.transform =
                     "translateY(0)";
 
-            }, 600 + i * 70);
+            }, 900 + i * 110);
 
         });
 
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 form.style.transform =
                     "translateY(0)";
 
-            }, 150);
+            }, 260);
 
         }
 
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(
             revealContact,
-            300
+            450
         );
 
     } else {

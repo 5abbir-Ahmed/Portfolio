@@ -528,13 +528,15 @@ document.addEventListener(
 
         }
 
-        const elements =
-            container.querySelectorAll(
-                ".back-link, .details-heading, " +
+        const elements = [
+            document.querySelector(".back-link"),
+            ...container.querySelectorAll(
+                ".details-heading, " +
                 ".hero-project-image, .details-grid, " +
                 ".features-section, .gallery-section, " +
                 ".project-bottom"
-            );
+            )
+        ].filter(Boolean);
 
 
         elements.forEach(
@@ -546,7 +548,7 @@ document.addEventListener(
                     "translateY(20px)";
 
                 element.style.transition =
-                    "opacity .6s ease, transform .6s ease";
+                    "opacity 1.05s ease, transform 1.05s ease";
 
 
                 setTimeout(
@@ -559,7 +561,7 @@ document.addEventListener(
                             "translateY(0)";
 
                     },
-                    100 + index * 100
+                    320 + index * 180
                 );
 
             }

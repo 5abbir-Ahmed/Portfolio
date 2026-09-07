@@ -54,6 +54,14 @@
 
     if (!overlay) return;
 
+    overlay.classList.add("is-entering");
+
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            overlay.classList.remove("is-entering");
+        }, 800);
+    });
+
     let isNavigating = false;
 
     document.querySelectorAll('a[href$=".html"]').forEach(link => {
@@ -108,18 +116,20 @@
 
             setTimeout(() => {
                 window.location.href = href;
-            }, 720);
+            }, 800);
 
         });
 
     });
 
-    window.addEventListener("pageshow", () => {
+    window.addEventListener("pageshow", event => {
 
         isNavigating = false;
 
-        overlay.classList.remove("closing");
-        overlay.classList.remove("is-entering");
+        if (event.persisted) {
+            overlay.classList.remove("closing");
+            overlay.classList.remove("is-entering");
+        }
 
     });
 
