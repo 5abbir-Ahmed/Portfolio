@@ -43,14 +43,38 @@
     const overlay = document.querySelector(".page-transition");
     if (!overlay) return;
 
-    document.querySelectorAll('a[href$=".html"]').forEach(link => {
+    const triggerEntrance = () => {
+        overlay.classList.remove("closing");
+        overlay.classList.remove("is-entering");
+        requestAnimationFrame(() => {
+            overlay.classList.add("is-entering");
+        });
+    };
+
+    const isInternalPath = href => {
+        if (!href) return false;
+        if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("http") || href.startsWith("//")) {
+            return false;
+        }
+        return href.endsWith(".html") || href.endsWith("/") || !href.includes(":") || href.startsWith("./") || href.startsWith("../") || href.startsWith("/");
+    };
+
+    document.querySelectorAll("a[href]").forEach(link => {
         link.addEventListener("click", function (e) {
             const href = this.getAttribute("href");
-            if (!href || href.startsWith("#") || href.startsWith("http") || this.target === "_blank") {
+            if (!isInternalPath(href) || this.target === "_blank") {
+                return;
+            }
+
+            const currentPage = window.location.pathname.split("/").pop() || "index.html";
+            const targetPage = href.split("?")[0].split("#")[0];
+            const samePage = targetPage === "" || targetPage === currentPage || targetPage === ".";
+            if (samePage) {
                 return;
             }
 
             e.preventDefault();
+            overlay.classList.remove("is-entering");
             overlay.classList.add("closing");
 
             setTimeout(() => {
@@ -59,14 +83,10 @@
         });
     });
 
-    // When the page is restored from the browser's back/forward
-    // cache (bfcache), the DOM is brought back exactly as it was
-    // right before leaving — including the "closing" class that
-    // was added above. That leaves the black bars covering the
-    // page with no JS re-running to remove them. Reset the
-    // overlay every time the page becomes visible again.
+    triggerEntrance();
+
     window.addEventListener("pageshow", () => {
-        overlay.classList.remove("closing");
+        triggerEntrance();
     });
 })();
 
