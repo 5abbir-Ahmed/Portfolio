@@ -55,7 +55,7 @@
 
             setTimeout(() => {
                 window.location.href = href;
-            }, 420);
+            }, 720);
         });
     });
 
