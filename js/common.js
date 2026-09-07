@@ -1,19 +1,25 @@
 (function initMenu() {
+
     const menuButton = document.querySelector(".menu-toggle");
     const navMenu = document.querySelector(".nav-menu");
 
     if (!menuButton || !navMenu) return;
 
     const closeMenu = () => {
+
         navMenu.classList.remove("open");
         menuButton.classList.remove("active");
         menuButton.setAttribute("aria-expanded", "false");
+
     };
 
     const toggleMenu = () => {
+
         const isOpen = navMenu.classList.toggle("open");
+
         menuButton.classList.toggle("active", isOpen);
         menuButton.setAttribute("aria-expanded", String(isOpen));
+
     };
 
     menuButton.addEventListener("click", toggleMenu);
@@ -23,60 +29,104 @@
     });
 
     document.addEventListener("click", event => {
-        const inside = navMenu.contains(event.target) || menuButton.contains(event.target);
+
+        const inside =
+            navMenu.contains(event.target) ||
+            menuButton.contains(event.target);
+
         if (!inside) closeMenu();
+
     });
 
     window.addEventListener("resize", () => {
-        if (window.innerWidth > 800) closeMenu();
+
+        if (window.innerWidth > 800) {
+            closeMenu();
+        }
+
     });
+
 })();
 
-/* ---------- OUTBOUND PAGE TRANSITION ----------
-   When leaving the page via an internal link, sweep the
-   bar overlay closed before navigating. The entrance
-   animation on the *next* page is owned by that page's
-   own script, so every page can feel different while the
-   exit always feels consistent. */
-
 (function initOutboundTransition() {
+
     const overlay = document.querySelector(".page-transition");
+
     if (!overlay) return;
 
+    let isNavigating = false;
+
     document.querySelectorAll('a[href$=".html"]').forEach(link => {
-        link.addEventListener("click", function (e) {
+
+        link.addEventListener("click", function (event) {
+
             const href = this.getAttribute("href");
-            if (!href || href.startsWith("#") || href.startsWith("http") || this.target === "_blank") {
+
+            if (!href) return;
+
+            if (href.startsWith("#")) return;
+
+            if (
+                href.startsWith("http://") ||
+                href.startsWith("https://") ||
+                href.startsWith("//")
+            ) {
                 return;
             }
 
-            e.preventDefault();
+            if (this.target === "_blank") return;
+
+            if (this.hasAttribute("download")) return;
+
+            if (isNavigating) {
+                event.preventDefault();
+                return;
+            }
+
+            event.preventDefault();
+
+            isNavigating = true;
+
+            const navMenu = document.querySelector(".nav-menu");
+            const menuButton = document.querySelector(".menu-toggle");
+
+            if (navMenu) {
+                navMenu.classList.remove("open");
+            }
+
+            if (menuButton) {
+                menuButton.classList.remove("active");
+                menuButton.setAttribute("aria-expanded", "false");
+            }
+
+            // Start exit transition
+            overlay.classList.remove("is-entering");
+
+            void overlay.offsetWidth;
+
             overlay.classList.add("closing");
 
             setTimeout(() => {
                 window.location.href = href;
             }, 720);
+
         });
+
     });
 
-    // When the page is restored from the browser's back/forward
-    // cache (bfcache), the DOM is brought back exactly as it was
-    // right before leaving — including the "closing" class that
-    // was added above. That leaves the black bars covering the
-    // page with no JS re-running to remove them. Reset the
-    // overlay every time the page becomes visible again.
     window.addEventListener("pageshow", () => {
+
+        isNavigating = false;
+
         overlay.classList.remove("closing");
+        overlay.classList.remove("is-entering");
+
     });
+
 })();
 
-/* ---------- REVEAL HELPER ----------
-   Pages call window.PortfolioReveal(elements, opts) to
-   observe a NodeList/array and add `.show` (or run a
-   custom callback) as items scroll into view, optionally
-   staggering the delay between items. */
-
 window.PortfolioReveal = function (elements, opts = {}) {
+
     const {
         threshold = 0.15,
         stagger = 0,
@@ -85,36 +135,53 @@ window.PortfolioReveal = function (elements, opts = {}) {
     } = opts;
 
     const list = Array.from(elements || []);
+
     if (!list.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+
+        list.forEach(el => onShow(el));
+
+        return;
+    }
 
     const observer = new IntersectionObserver(
         entries => {
+
             entries.forEach(entry => {
+
                 if (!entry.isIntersecting) return;
 
                 const index = list.indexOf(entry.target);
-                const delay = Math.max(index, 0) * stagger;
 
-                setTimeout(() => onShow(entry.target), delay);
+                const delay =
+                    Math.max(index, 0) * stagger;
 
-                if (once) observer.unobserve(entry.target);
+                setTimeout(() => {
+                    onShow(entry.target);
+                }, delay);
+
+                if (once) {
+                    observer.unobserve(entry.target);
+                }
+
             });
+
         },
-        { threshold }
+        {
+            threshold
+        }
     );
 
     list.forEach(el => observer.observe(el));
 
     return observer;
-};
 
-/* ---------- CONTACT FORM (shared handler, used only
-   where a .contact-form exists) ---------- */
+};
 
 (function initContactForm() {
 
-    const form =
-        document.querySelector(".contact-form");
+    const form = document.querySelector(".contact-form");
 
     if (!form) return;
 
@@ -122,11 +189,6 @@ window.PortfolioReveal = function (elements, opts = {}) {
     form.addEventListener("submit", async event => {
 
         event.preventDefault();
-
-
-        /* =========================
-           EMAIL VALIDATION
-        ========================= */
 
         const emailInput =
             form.querySelector('input[type="email"]');
@@ -138,7 +200,6 @@ window.PortfolioReveal = function (elements, opts = {}) {
 
             const emailPattern =
                 /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 
             if (!emailPattern.test(email)) {
 
@@ -152,12 +213,8 @@ window.PortfolioReveal = function (elements, opts = {}) {
 
                 return;
             }
+
         }
-
-
-        /* =========================
-           FORMSPREE SUBMIT
-        ========================= */
 
         form.dispatchEvent(
             new CustomEvent("portfolio:sending")
@@ -174,8 +231,7 @@ window.PortfolioReveal = function (elements, opts = {}) {
                     body: new FormData(form),
 
                     headers: {
-                        Accept:
-                            "application/json"
+                        Accept: "application/json"
                     }
 
                 });
@@ -200,6 +256,7 @@ window.PortfolioReveal = function (elements, opts = {}) {
                 );
 
             }
+
 
         } catch (error) {
 
